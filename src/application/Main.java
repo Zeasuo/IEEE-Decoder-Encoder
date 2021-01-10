@@ -34,7 +34,8 @@ public class Main extends Application {
 		//CheckBoxs
 		CheckBox input_dec = new CheckBox("Decimal Number");
 		CheckBox input_floating = new CheckBox("Floating Point");
-		
+		input_dec.setOnAction(new DecCheckBoxEventHandler(input_dec, input_floating));
+		input_floating.setOnAction(new FloatingCheckBoxEventHandler(input_dec, input_floating));
 		//Attach to Scene
 		root.add(input_lab, 0 ,0);
 		root.add(input_num, 0, 1);
