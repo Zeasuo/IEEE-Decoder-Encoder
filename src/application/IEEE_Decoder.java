@@ -38,9 +38,6 @@ public class IEEE_Decoder {
 			}
 			powerOf2AfterDecimal -= 1;
 		}
-		System.out.println(mantissa);
-		System.out.println(exp);
-		System.out.println(value);
 		float temp = (float) ((1.0+value) * Math.pow(2, exp-127));
 		return result + temp;
 		
