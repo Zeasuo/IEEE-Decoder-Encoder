@@ -1,10 +1,18 @@
 package application;
 
+import java.util.HashMap;
+
 public class IEEE_Encoder {
 	private String decimal_num;
+	private HashMap<String, String> special = new HashMap<String, String>();
 	
 	public IEEE_Encoder(String dec) {
 		this.decimal_num = dec;
+		special.put("infinity", "01111111100000000000000000000000");
+		special.put("-infinity", "11111111100000000000000000000000");
+		special.put("NaN", "01111111111111111111111111111111");
+		special.put("0", "00000000000000000000000000000000");
+		special.put("-0", "10000000000000000000000000000000");
 	}
 	/***
 	 * Convert the decimal_num into a floating point representation of 32 bits(Single precision)
@@ -14,10 +22,15 @@ public class IEEE_Encoder {
 		String result;
 		float dec;
 		int exp = 127;
+		//check for special values
+		if (special.containsKey(this.decimal_num)) {
+			return special.get(this.decimal_num);
+		}
+		//Convert String to float
 		try {
 			dec = Float.parseFloat(this.decimal_num);
 		}
-		catch (NumberFormatException e) {
+		catch (Exception e) {
 			return "Invalid input.";
 		}
 		//Check for sign
@@ -29,7 +42,7 @@ public class IEEE_Encoder {
 		}
 		
 		//Compute Exponents
-		while (!(dec > 1.0f && dec < 2.0f)) {
+		while (!(dec >= 1.0f && dec < 2.0f)) {
 			if (dec >= 2.0f) {
 				dec /= 2.0f;
 				exp += 1;
@@ -55,6 +68,7 @@ public class IEEE_Encoder {
 				bin_exp += "0";
 			}
 		}
+		
 		//Compute Mantissa
 		int power_of_2 = -1;
 		String mantissa = "";
