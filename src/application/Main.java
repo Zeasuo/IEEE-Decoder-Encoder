@@ -27,6 +27,8 @@ public class Main extends Application {
 		//Labels
 		Label input_lab = new Label("Input:");
 		Label output_lab = new Label("Output:");
+		Label note = new Label("Special Value: Enter 'NaN', 'infinity', or '-inifinity' to get corresponding IEEE754 values (Case Sensative)");
+		Label note_2 = new Label("Note: 0 and -0 gives different values");
 		
 		//Buttons
 		Button convert = new Button("Convert");
@@ -48,6 +50,8 @@ public class Main extends Application {
 		root.add(output_lab, 0, 2);
 		root.add(output_num, 0, 3);
 		root.add(convert, 0, 4);
+		root.add(note, 0, 5);
+		root.add(note_2, 0, 6);
 		
 		stage.setTitle("IEEE Converter");
 		Scene scene = new Scene(root);
